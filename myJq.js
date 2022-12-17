@@ -31,6 +31,7 @@ function allFunctionsContainer(collection) {
     collection.forEach((element) => {
       element.addEventListener(eventName, handlerFunc);
     });
+    return collection;
   };
 
   // css function
@@ -41,19 +42,30 @@ function allFunctionsContainer(collection) {
           element.style[property] = value;
         }
       });
-      return;
+
+      return collection;
     }
 
     let [property, value] = args;
     collection.forEach((element) => {
       element.style[property] = value;
     });
+
+    return collection;
   };
 
   // hide function
-  collection.hide = () => {
+  collection.hide = (...timeArgs) => {
     collection.forEach((element) => {
-      element.style["display"] = "none";
+      let time = timeArgs[0];
+      if (typeof time === "number") {
+        setTimeout(() => {
+          element.style["display"] = "none";
+        }, time);
+      } else {
+      }
+
+      return collection;
     });
   };
 
@@ -62,6 +74,7 @@ function allFunctionsContainer(collection) {
     collection.forEach((element) => {
       element.style["display"] = "block";
     });
+    return collection;
   };
 
   // toggle function
@@ -70,5 +83,6 @@ function allFunctionsContainer(collection) {
       let currStyle = window.getComputedStyle(element).display;
       element.style["display"] = currStyle === "none" ? "" : "none";
     });
+    return collection;
   };
 }
