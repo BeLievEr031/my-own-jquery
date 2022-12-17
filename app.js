@@ -1,13 +1,5 @@
 $(document).ready(() => {
-  $("#hide").click(() => {
-    $("h1").hide();
-  });
-
-  $("#show").click(() => {
-    $("#h1").toggle();
+  $("button").click(function () {
+    $(this).css("color", "red");
   });
 });
-// document.querySelector("h1").style["color"] = "red"
-// let st = document.querySelector("h1").style;
-
-// console.log(st.color);
