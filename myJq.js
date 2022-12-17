@@ -34,6 +34,28 @@ const $ = (...args) => {
       });
     };
 
+    // hide function
+    collection.hide = () => {
+      collection.forEach((element) => {
+        element.style["display"] = "none";
+      });
+    };
+
+    // show function
+    collection.show = () => {
+      collection.forEach((element) => {
+        element.style["display"] = "block";
+      });
+    };
+
+    // toggle function
+    collection.toggle = () => {
+      collection.forEach((element) => {
+        let currStyle = window.getComputedStyle(element).display;
+        element.style["display"] = currStyle === "none" ? "" : "none";
+      });
+    };
+
     return collection;
   } else if (typeof args[0] === "function" || typeof args[0] === "object") {
     if (typeof args[0] === "object") {

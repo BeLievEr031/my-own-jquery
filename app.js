@@ -1,7 +1,13 @@
 $(document).ready(() => {
-  $("h1").click(() => {
-    console.log("clicked");
+  $("#hide").click(() => {
+    $("h1").hide();
   });
 
-  $("h1").css("color","blue");
+  $("#show").click(() => {
+    $("#h1").toggle();
+  });
 });
+// document.querySelector("h1").style["color"] = "red"
+// let st = document.querySelector("h1").style;
+
+// console.log(st.color);
