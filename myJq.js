@@ -55,34 +55,131 @@ function allFunctionsContainer(collection) {
   };
 
   // hide function
-  collection.hide = (...timeArgs) => {
+  collection.hide = (...args) => {
     collection.forEach((element) => {
-      let time = timeArgs[0];
+      let time = args[0];
+      let cb = args[1];
+
+      if (args.length === 0) {
+        element.style["display"] = "none";
+        return;
+      }
+
+      if (typeof time === "function") {
+        element.style["display"] = "none";
+        args[0]();
+        return;
+      }
+
       if (typeof time === "number") {
         setTimeout(() => {
           element.style["display"] = "none";
+          args.length < 2 ? "" : checkingForCB(cb);
         }, time);
-      } else {
+      } else if (typeof time === "string") {
+        if (time === "slow") {
+          setTimeout(() => {
+            element.style["display"] = "none";
+            args.length < 2 ? "" : checkingForCB(cb);
+          }, 1000);
+        } else if (time === "fast") {
+          setTimeout(() => {
+            element.style["display"] = "none";
+            args.length < 2 ? "" : checkingForCB(cb);
+          }, 800);
+        }
       }
-
-      return collection;
     });
+    return collection;
   };
 
   // show function
-  collection.show = () => {
+  collection.show = (...args) => {
     collection.forEach((element) => {
-      element.style["display"] = "block";
+      let currStyle = window.getComputedStyle(element).display;
+      let time = args[0];
+      let cb = args[1];
+
+      if (args.length === 0) {
+        element.style["display"] = currStyle === "none" ? "" : "";
+        return;
+      }
+
+      if (typeof time === "function") {
+        element.style["display"] = currStyle === "none" ? "" : "";
+        args[0]();
+        return;
+      }
+
+      if (typeof time === "number") {
+        setTimeout(() => {
+          element.style["display"] = currStyle === "none" ? "" : "";
+          args.length < 2 ? "" : checkingForCB(cb);
+        }, time);
+      } else if (typeof time === "string") {
+        if (time === "slow") {
+          setTimeout(() => {
+            element.style["display"] = currStyle === "none" ? "" : "";
+            args.length < 2 ? "" : checkingForCB(cb);
+          }, 1000);
+        } else if (time === "fast") {
+          setTimeout(() => {
+            element.style["display"] = currStyle === "none" ? "" : "";
+            args.length < 2 ? "" : checkingForCB(cb);
+          }, 800);
+        }
+      }
     });
     return collection;
   };
 
   // toggle function
-  collection.toggle = () => {
+  collection.toggle = (...args) => {
     collection.forEach((element) => {
       let currStyle = window.getComputedStyle(element).display;
-      element.style["display"] = currStyle === "none" ? "" : "none";
+      let time = args[0];
+      let cb = args[1];
+
+      if (args.length === 0) {
+        element.style["display"] = currStyle === "none" ? "" : "none";
+        return;
+      }
+
+      if (typeof time === "function") {
+        element.style["display"] = currStyle === "none" ? "" : "none";
+        args[0]();
+        return;
+      }
+
+      if (typeof time === "number") {
+        setTimeout(() => {
+          element.style["display"] = currStyle === "none" ? "" : "none";
+          args.length < 2 ? "" : checkingForCB(cb);
+        }, time);
+      } else if (typeof time === "string") {
+        if (time === "slow") {
+          setTimeout(() => {
+            element.style["display"] = currStyle === "none" ? "" : "none";
+            args.length < 2 ? "" : checkingForCB(cb);
+          }, 1000);
+        } else if (time === "fast") {
+          setTimeout(() => {
+            element.style["display"] = currStyle === "none" ? "" : "none";
+            args.length < 2 ? "" : checkingForCB(cb);
+          }, 800);
+        }
+      }
     });
     return collection;
   };
 }
+
+
+
+const checkingForCB = (cb) => {
+  typeof cb === "function"
+    ? cb()
+    : console.error(
+        `Invlaid argument getting ${typeof cb} instead of a function`
+      );
+};

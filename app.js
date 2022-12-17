@@ -1,5 +1,12 @@
 $(document).ready(() => {
-  $("button").click(function () {
-    $(this).css("color", "red").hide(1000);
+  $("#hide").click(() => {
+    $("span").hide();
+  });
+  $("#show").click(() => {
+    $("span").show();
+  });
+
+  $("#toggle").click(() => {
+    $("span").toggle("slow");
   });
 });
