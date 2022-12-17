@@ -3,5 +3,5 @@ $(document).ready(() => {
     console.log("clicked");
   });
 
-  $("h1").css("OIJHK");
+  $("h1").css("color","blue");
 });
